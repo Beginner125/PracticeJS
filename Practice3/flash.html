@@ -1,0 +1,45 @@
+<!-- 使用canvas展现渲染的光球 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>动</title>
+		<style>
+			*{margin: 0px;padding: 0px;}
+			#animal{width: 1366px;height: 764px;background-color: rgba(21, 123,22,0.4);}
+		</style>
+	</head>
+	<body>
+		<canvas id="animal">sdfsd</canvas>
+	</body>
+	<script>
+		var canvas = document.getElementById("animal");
+		var width = canvas.getAttribute("width");
+		var height = canvas.getAttribute("height");
+		var context = canvas.getContext("2d");
+		context.strokeRect(0, 0, width, height);
+		var radius = 20;
+		var flag=1;
+		var x = 80;
+		var y = 80;
+		var flash = function(){
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			context.fillStyle = "rgba(255,204,204,"+0.1+")";
+			radius += flag;
+		    if(radius == 40 || radius == 20){
+		    	flag = -flag;
+		    	if(radius == 20){
+		    		x = 200*(Math.random()-0.5)+80;
+		    		y = 200*(Math.random()-0.5)+80;
+		    	}
+		    }
+			for (var i = 0; i < 19; i++) {
+				context.beginPath();
+				context.arc(x,y,radius-i*(radius/20),0, Math.PI*2, false);
+				context.fill();
+				context.closePath();
+			}
+		}
+		var timer = setInterval(flash, 16.6)
+	</script>
+</html>

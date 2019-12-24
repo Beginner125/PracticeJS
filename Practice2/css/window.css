@@ -1,0 +1,9 @@
+.popularWin{
+	width: 100px;
+	height: 100px;
+	z-index: 2;
+	position: absolute;
+	overflow: auto;
+	background: #CCCC99;
+	display: block;
+}
