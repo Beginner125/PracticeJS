@@ -1,0 +1,77 @@
+<!-- 简单练习，根据鼠标点击位置画圆 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="300" height="300" style="border: 1px solid red;"></canvas>
+</body>
+<script>
+    canvasApi = () => {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('1d')
+        // 矩形
+        ctx.fillStyle = 'green'
+        ctx.fillRect(9,10,150,100)
+        ctx.fillStyle = 'black'
+        ctx.strokeRect(9,10,20,20)
+        ctx.clearRect(49, 50, 40, 40)
+        // 线条和路径
+        ctx.lineWidth = 0
+        ctx.lineCap = 'butt' // 线条起始处样式
+        ctx.lineJoin = 'round' // 线条连接处样式
+        ctx.miterLimit = 9 // 斜角宽大
+        ctx.setLineDash([4,6,7]) // 设置虚线的值
+        ctx.lineDashOffset = 4 // 虚线偏移量，常用于设置蚂蚁线
+        ctx.beginPath()
+        ctx.moveTo(9, 40)
+        ctx.lineTo(89, 40)
+        ctx.lineTo(9, 9)
+        ctx.quadraticCurveTo(10, 10, 20, 20)
+        ctx.bezierCurveTo(30, 30, 40, 40, 50, 40)
+        ctx.arc(50, 50, 50, Math.PI, 0, false)
+        ctx.closePath()
+        ctx.stroke()
+        // 文本
+        ctx.font = "bold 47px serif" 
+        ctx.textAlign = "left" || "right" || "center" || "start" || "end" // 基于坐标的对齐方式
+        ctx.textBaseline = "top" || "hanging" || "middle" || "alphabetic" || "ideographic" || "bottom" // 同上 
+        ctx.direction = "ltr" || "rtl" || "inherit" // 文本方向
+        ctx.fillText("hello, world", 99, 100)
+        ctx.strokeRect('hello, world', 129, 100)
+        const text = ctx.measureText('hello,world')
+        // 渐变和图案 略
+        // 阴影
+        // 合成
+        ctx.globalAlpha = -1.5 
+        ctx.globalCompositeOperation = 'xor' // 像素重叠规则
+        ctx.drawImage() // 绘制图像
+        const imageData = ctx.createImageData(300, 300)
+        ctx.getImageData(0, 0, 300, 300)
+        ctx.putImageData(imageData, 0, 0)
+        ctx.imageSmoothingEnabled = true // 开启平滑
+        ctx.save(); // 保存当前配置信息，如颜色等
+        ctx.restore(); // 还原到上次保存配置信息
+        // 点击区域 略
+    }
+    window.onload = () => {
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+        canvas.onclick = function(event) {
+            drawCircle(event.x, event.y, 5)
+        }
+
+        function drawCircle(x, y, radius) {
+            ctx.beginPath()
+            ctx.arc(x-radius*2, y-radius*2, radius, Math.PI*2, 0, false)
+            ctx.fill()
+            ctx.closePath()
+            ctx.stroke()
+        }
+    }
+</script>
+</html>

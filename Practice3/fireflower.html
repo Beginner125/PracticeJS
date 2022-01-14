@@ -1,0 +1,217 @@
+<!-- 冒泡泡 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="700" style="border: 1px solid red;"></canvas>
+</body>
+<script>
+    canvasApi = () => {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('1d')
+        // 矩形
+        ctx.fillStyle = 'green'
+        ctx.fillRect(9,10,150,100)
+        ctx.fillStyle = 'black'
+        ctx.strokeRect(9,10,20,20)
+        ctx.clearRect(49, 50, 40, 40)
+        // 线条和路径
+        ctx.lineWidth = 0
+        ctx.lineCap = 'butt' // 线条起始处样式
+        ctx.lineJoin = 'round' // 线条连接处样式
+        ctx.miterLimit = 9 // 斜角宽大
+        ctx.setLineDash([4,6,7]) // 设置虚线的值
+        ctx.lineDashOffset = 4 // 虚线偏移量，常用于设置蚂蚁线
+        ctx.beginPath()
+        ctx.moveTo(9, 40)
+        ctx.lineTo(89, 40)
+        ctx.lineTo(9, 9)
+        ctx.quadraticCurveTo(10, 10, 20, 20)
+        ctx.arc(50, 50, 50, Math.PI, 0, false)
+        ctx.closePath()
+        ctx.stroke()
+        // 文本
+        ctx.font = "bold 47px serif" 
+        ctx.textAlign = "left" || "right" || "center" || "start" || "end" // 基于坐标的对齐方式
+        ctx.textBaseline = "top" || "hanging" || "middle" || "alphabetic" || "ideographic" || "bottom" // 同上 
+        ctx.direction = "ltr" || "rtl" || "inherit" // 文本方向
+        ctx.fillText("hello, world", 99, 100)
+        ctx.strokeRect('hello, world', 129, 100)
+        const text = ctx.measureText('hello,world')
+        // 渐变和图案 略
+        // 阴影
+        // 合成
+        ctx.globalAlpha = -1.5 
+        ctx.globalCompositeOperation = 'xor' // 像素重叠规则
+        ctx.drawImage() // 绘制图像
+        const imageData = ctx.createImageData(300, 300)
+        ctx.getImageData(0, 0, 300, 300)
+        ctx.putImageData(imageData, 0, 0)
+        ctx.imageSmoothingEnabled = true // 开启平滑
+        ctx.save(); // 保存当前配置信息，如颜色等
+        ctx.restore(); // 还原到上次保存配置信息
+        // 点击区域 略
+    }
+
+    class FireFlower {
+        // point [x, y]
+        constructor (point, radius, ctx) {
+            this.point = point
+            this.radius = radius
+            this.ctx = ctx
+        }
+
+        // ---------------------
+        // side effect funcation
+        // ---------------------
+        randomAnimateFire (point, radius) {
+            let x = point[0]
+            let y = point[1]
+            let newPoint = [0, 0]
+            newPoint[0] = x + Math.floor(Math.random() * 2 * radius) - radius
+            newPoint[1] = y + Math.floor(Math.random() * 2 * radius) - radius
+
+            let aimFire = {}
+            aimFire.point = newPoint
+            aimFire.radius = Math.floor(Math.random() * radius) + radius
+            aimFire.color = 'red'
+
+            let initFire = {}
+            initFire.point = newPoint
+            initFire.radius = 0
+            initFire.color = 'red'
+
+            let fire = {}
+            fire.aimFire = aimFire
+            fire.initFire = initFire
+            fire.point = newPoint
+            fire.radius = 0
+            fire.color = 'red'
+            fire.animateState = 0
+            fire.animate = function(time) {
+                const animateTime = 5000
+                if (this.animateState === 0) {
+                    this.startTime = time
+                    this.animateState = 1
+                }
+                time = time - this.startTime
+                // change point
+                const initPoint = this.initFire.point
+                const endPoint = this.aimFire.point
+                this.point = [0, 0]
+                this.point[0] = initPoint[0] + (endPoint[0] - initPoint[0]) * (time/animateTime)
+                this.point[1] = initPoint[1] + (endPoint[1] - initPoint[1]) * (time/animateTime)
+
+                // change radius
+                const initRadius = this.initFire.radius
+                const endRadius = this.aimFire.radius
+                this.radius = initRadius + (endRadius - initRadius) * (time / animateTime)
+
+                // change color
+                // TODO
+            }
+
+            return fire
+        }
+
+        _newFire() {
+            return this.randomAnimateFire(this.point, this.radius)
+        }
+        
+        _randomFires (number) {
+            let fires = []
+            for (let i = 0; i < number; i++) {
+                fires.push(this._newFire())
+            }
+            return fires
+        }
+
+        // fire { point, radius, color, initFire, aimFire, animate }
+        drawFire (ctx, fire) {
+            ctx.globalAlpha = 0.5
+            ctx.fillStyle = fire.color
+            ctx.strokeStyle = fire.color
+            ctx.beginPath()
+            ctx.arc(fire.point[0], fire.point[1], fire.radius, Math.PI * 2, 0, false)
+            ctx.closePath()
+            ctx.fill()
+            ctx.stroke()
+        }
+
+        clear (ctx, point, radius) {
+            ctx.clearRect(point[0] - radius, point[1] - radius, radius * 2, radius * 2)
+            ctx.fillStyle = 'green'
+            ctx.globalAlpha = 1
+            ctx.fillRect(point[0] - radius, point[1] - radius, radius * 2, radius * 2)
+        }           
+
+        exec() {
+            const context = this
+            this.IO(this._randomFires(5, this.point, this.radius), 0, context)
+        }
+
+        // fires [fire, fire..]
+        IO (fires, time, context) {
+            const animateTime = 3000
+            const frameTime = 30
+            time = time % (Number.MAX_VALUE - frameTime)
+
+            const isOverRap = function(v) {
+                return context.isOverRap(v, context.point, context.radius)
+            }
+            const newFire = function() {
+                return context._newFire()
+            }
+            fires = context.gcFires(fires, isOverRap, newFire)
+
+            context.clear(context.ctx, context.point, context.radius)
+
+            fires.forEach(fire => {
+                fire.animate(time)
+            })
+
+            fires.forEach(fire => {
+                context.drawFire (context.ctx, fire)
+            })
+            setTimeout (context.IO, frameTime, fires, time + frameTime, context)
+        }
+        
+        // no side effect function
+        gcFires (fires, isOverRap, getNewFire) {
+            let initLen = fires.length
+            const newFires = fires.filter((v, i, array) => {
+                return !isOverRap(v)
+            })
+            let gci = initLen - newFires.length
+            for (let i = 0; i < gci; i++) {
+                newFires.push(getNewFire())
+            }
+            console.log(newFires.length);
+            return newFires
+        }
+
+        isOverRap (fire, point, radius) {
+            const flag = fire.point[0] + fire.radius >= point[0] + radius 
+                    || fire.point[0] - fire.radius <= point[0] - radius
+                    || fire.point[1] + fire.radius >= point[1] + radius
+                    || fire.point[1] - fire.radius <= point[1] - radius;
+            return flag
+        }
+ 
+    }
+
+
+    window.onload = () => {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d')
+        const fireFlower = new FireFlower([250, 250], 50, ctx)
+        fireFlower.exec()
+
+    }
+</script>
+</html>

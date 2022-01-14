@@ -1,0 +1,261 @@
+<!-- 圆滑曲线连接多个点 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600" style="border: 1px solid red;"></canvas>
+</body>
+<script>
+    canvasApi = () => {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('1d')
+        // 矩形
+        ctx.fillStyle = 'green'
+        ctx.fillRect(9,10,150,100)
+        ctx.fillStyle = 'black'
+        ctx.strokeRect(9,10,20,20)
+        ctx.clearRect(49, 50, 40, 40)
+        // 线条和路径
+        ctx.lineWidth = 0
+        ctx.lineCap = 'butt' // 线条起始处样式
+        ctx.lineJoin = 'round' // 线条连接处样式
+        ctx.miterLimit = 9 // 斜角宽大
+        ctx.setLineDash([4,6,7]) // 设置虚线的值
+        ctx.lineDashOffset = 4 // 虚线偏移量，常用于设置蚂蚁线
+        ctx.beginPath()
+        ctx.moveTo(9, 40)
+        ctx.lineTo(89, 40)
+        ctx.lineTo(9, 9)
+        ctx.quadraticCurveTo(10, 10, 20, 20)
+        ctx.arc(50, 50, 50, Math.PI, 0, false)
+        ctx.closePath()
+        ctx.stroke()
+        // 文本
+        ctx.font = "bold 47px serif" 
+        ctx.textAlign = "left" || "right" || "center" || "start" || "end" // 基于坐标的对齐方式
+        ctx.textBaseline = "top" || "hanging" || "middle" || "alphabetic" || "ideographic" || "bottom" // 同上 
+        ctx.direction = "ltr" || "rtl" || "inherit" // 文本方向
+        ctx.fillText("hello, world", 99, 100)
+        ctx.strokeRect('hello, world', 129, 100)
+        const text = ctx.measureText('hello,world')
+        // 渐变和图案 略
+        // 阴影
+        // 合成
+        ctx.globalAlpha = -1.5 
+        ctx.globalCompositeOperation = 'xor' // 像素重叠规则
+        ctx.drawImage() // 绘制图像
+        const imageData = ctx.createImageData(300, 300)
+        ctx.getImageData(0, 0, 300, 300)
+        ctx.putImageData(imageData, 0, 0)
+        ctx.imageSmoothingEnabled = true // 开启平滑
+        ctx.save(); // 保存当前配置信息，如颜色等
+        ctx.restore(); // 还原到上次保存配置信息
+        // 点击区域 略
+    }
+    const x = 0
+    const y = 1
+    window.onload = () => {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d')
+        const point = [170, 150]
+        const points = [
+            [40, 40],
+            [100, 60],
+            point,
+            [70, 200]
+        ]
+        
+        paint(points, ctx)
+        // setInterval(function() {
+        //     point[x] += 1
+        //     paint(points, ctx)
+        // }, 30)
+    }
+
+
+    function paint(points, ctx) {
+        ctx.clearRect(0, 0, 800, 600)
+        const lines = toLines(points)
+        addCenterPoint(lines)
+        ctx.fillStyle = 'black'
+        ctx.strokeStyle = 'black'
+        // drawLines(lines, ctx)
+        ctx.fillStyle = 'red'
+        ctx.strokeStyle = 'red'
+        const centerLines = toLines(getCenterPoint(lines)) 
+        addRadioPoints(centerLines, getRadios(centerLines))
+        // drawLines(centerLines, ctx)
+
+        const startpoints = []
+        for (let i = 0; i < centerLines.length; i++) {
+            startpoints.push(centerLines[i][2])
+        }
+
+        const endpoints = []
+        for (let i = 1; i < points.length; i++) {
+            const point = points[i];
+            endpoints.push(point)
+            
+        }
+        endpoints.push(points[0])
+
+        const vectors = getVectorPoints(endpoints, startpoints)
+        moveLines(centerLines, vectors)
+        // drawLines(centerLines, ctx)
+        
+        const controlPointA = []
+        const controlPointB = []
+        controlPointA.push(centerLines[centerLines.length - 1][1])
+        for (let i = 0; i < centerLines.length - 1; i++) {
+            const line = centerLines[i];
+            controlPointB.push(line[0])
+            controlPointA.push(line[1])
+        }
+        controlPointB.push(centerLines[centerLines.length - 1][0])
+        drawCurveLines(lines, ctx, controlPointA, controlPointB)
+    }
+
+    function drawPoint(point, ctx) {
+        ctx.beginPath()
+        ctx.moveTo(point[0], point[1])
+        ctx.arc(point[0], point[1], 1, Math.PI * 2, 0, false)
+        ctx.closePath()
+        ctx.fill()
+        ctx.stroke()
+    }
+
+    function drawLine(line, ctx) {
+        line.forEach(point => {
+            drawPoint(point, ctx)
+        });
+        ctx.beginPath()
+        ctx.moveTo(line[0][0], line[0][1])
+        ctx.lineTo(line[1][0], line[1][1])
+        ctx.stroke()
+    }
+
+    function drawCurveLine(line, ctx, controlA, controlB) {
+        line.forEach(point => {
+            drawPoint(point, ctx)
+        });
+        ctx.beginPath()
+        ctx.moveTo(line[0][0], line[0][1])
+        ctx.bezierCurveTo(controlA[0], controlA[1], controlB[0], controlB[1], line[1][0], line[1][1])
+        ctx.stroke()
+    }
+
+    function drawLines(lines, ctx) {
+        lines.forEach(line => {
+            drawLine(line, ctx)
+        });
+    }
+
+    function drawCurveLines(lines, ctx, controlPointsA, controlPointsB) {
+        lines.forEach((line, i, lines) => {
+            drawCurveLine(line, ctx, controlPointsA[i], controlPointsB[i])
+        });
+    }
+
+    function toLines(points) {
+        let res = []
+        for (let i = 0; i < points.length; i++) {
+            const point = JSON.parse(JSON.stringify(points[i]));
+            const endPoint = JSON.parse(JSON.stringify(points[(i+1) % points.length]))
+            res.push([point, endPoint])
+        }
+        return res
+    }
+
+    function addCenterPoint(lines) {
+        lines.forEach(line => {
+            let centerPoint = [
+                (line[0][0] + line[1][0]) / 2,
+                (line[0][1] + line[1][1]) / 2
+            ]
+            line.push(centerPoint)
+        });
+    }
+
+    function getCenterPoint(lines) {
+        let res = []
+        lines.forEach(line => {
+            let centerPoint = [
+                (line[0][0] + line[1][0]) / 2,
+                (line[0][1] + line[1][1]) / 2
+            ]
+            res.push(centerPoint)
+        });
+        return res
+    }
+
+    function getRadios(lines) {
+        let res = []
+        for (let i = 0; i < lines.length; i++) {
+            let distanceA = getDistance(lines[i])
+            let distanceB = getDistance(lines[(i+1) % lines.length])
+            res.push(distanceA/(distanceB + distanceA))
+        }
+        return res
+    }
+
+    function getDistance(line) {
+        let vector = [
+            line[0][1] - line[0][0],
+            line[1][1] - line[1][0]
+        ]
+        let l = Math.pow(vector[0], 2) + Math.pow(vector[1], 2)
+        return Math.sqrt(l)
+    }
+
+    function getRadioPoint(line, radio) {
+        let pA = line[0]
+        let pB = line[1]
+        let pCX = pA[x] + (pB[x] - pA[x]) * radio
+        let pCY = pA[y] + (pB[y] - pA[y]) * radio
+        return [pCX, pCY]
+    }
+
+    function addRadioPoints(lines, radios) {
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            line.push(getRadioPoint(line, radios[i]))
+        }
+    }
+
+    function getVectorPoints(endPoints, startPoints) {
+        let res = []
+        startPoints.forEach((startPoint, i, all) => {
+            let vector = [
+                endPoints[i][x] - startPoint[x],
+                endPoints[i][y] - startPoint[y]
+            ]
+            res.push(vector)
+        });
+        return res
+    }
+
+    function moveLines(lines, vectors) {
+        lines.forEach((line, i, lines) => {
+            moveLine(line, vectors[i])
+        });
+    }
+
+    function moveLine(line, vector) {
+        line.forEach(point => {
+            point[x] += vector[x]
+            point[y] += vector[y]
+        });
+    }
+    // --------------------------------
+    //  计算控制点
+    // --------------------------------
+    
+
+    
+</script>
+</html>

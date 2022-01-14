@@ -1,0 +1,63 @@
+/* 该文件为通用文件 */
+/* 通用 */
+* {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  text-decoration: none;
+}
+span {
+  padding: 5px 10px 5px 10px;
+  font-size: 16px;
+}
+/* 布局 */
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
+}
+.between:first-child {
+  display: flex;
+}
+.between:last-child {
+  display: flex;
+}
+/* 图标 */
+.icon {
+  width: 30px;
+  height: 30px;
+}
+.icon-head {
+  width: 30px;
+  height: 30px;
+  border-radius: 25%;
+}
+/* 按钮 */
+.btn {
+  background-color: #0066FF;
+  color: white;
+  font-size: 13px;
+  font-size: 13px;
+  text-align: center;
+  width: 70px;
+}
+.btn-blank {
+  border: #0066FF 1px solid;
+  border-radius: 5px;
+  color: #0066FF;
+  font-size: 13px;
+  text-align: center;
+  width: 70px;
+}
