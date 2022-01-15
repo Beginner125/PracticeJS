@@ -34,6 +34,40 @@ span {
 .between:last-child {
   display: flex;
 }
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 5px 5px #F7F7F7;
+  width: 99vw;
+  height: 50px;
+  background-color: white;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+}
+.header img:first-child {
+  margin-left: 4vw;
+}
+.header div:last-child {
+  margin-right: 4vw;
+}
+.content {
+  margin: 0px 80px 0px 80px;
+}
+.card {
+  border: #F0F0F2 1px solid;
+  border-radius: 3px;
+  padding: 15px 20px 15px 20px;
+  width: 100%;
+}
+.card .title {
+  color: #767676;
+  background-color: #F6F6F6;
+  padding: 10px 0px 10px 10px;
+  width: 100%;
+}
 /* 图标 */
 .icon {
   width: 30px;
@@ -46,7 +80,7 @@ span {
 }
 /* 按钮 */
 .btn {
-  background-color: #0066FF;
+  background-color: #3ABCFB;
   color: white;
   font-size: 13px;
   font-size: 13px;
@@ -54,10 +88,49 @@ span {
   width: 70px;
 }
 .btn-blank {
-  border: #0066FF 1px solid;
+  border: #3ABCFB 1px solid;
   border-radius: 5px;
-  color: #0066FF;
+  color: #3ABCFB;
   font-size: 13px;
   text-align: center;
   width: 70px;
+}
+/* 覆写样式 */
+.input {
+  border-color: #E8E8ED;
+  background-color: #F5F6F7;
+  color: #555B6F;
+}
+.input:focus {
+  border-color: #3ABCFB;
+  outline: none;
+}
+.span {
+  width: 100%;
+  padding: 5px 10px 5px 10px;
+  font-size: 16px;
+}
+/* 样式 */
+.blankrect-row {
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+}
+.ads-color {
+ background-color: teal;
+}
+.tip {
+  color: #9C9C9C;
+  padding: 5px 5px 5px 5px;
+  font-size: 13px;
+}
+.title-line {
+  border-bottom: #F0F0F2 1px solid;
+  padding: 5px 0px 0px 0px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.title-line .checked {
+  border-bottom: #222226 1px solid;
 }
