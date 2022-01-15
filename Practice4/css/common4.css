@@ -1,0 +1,27 @@
+.header-s {
+  background-color: #24292F;
+  width: 100%;
+  color: #FFFFF2;
+  justify-content: space-between;
+}
+.container {
+  width: 100vw;
+  align-items: flex-start;
+}
+.container>.left {
+  width: 20vw;
+  overflow: hidden;
+  align-items: flex-start;
+  padding: 10px 20px 10px 20px;
+}
+.container>.left>* {
+  width: 100%;
+}
+.container>.left .span {
+  padding: 5px 0px 5px 0px;
+}
+.container>.right {
+  width: 80vw;
+  padding: 30px;
+  background-color: #F6F8FA;
+}

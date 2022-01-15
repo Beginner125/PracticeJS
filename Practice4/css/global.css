@@ -26,7 +26,6 @@ span {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px 0px 20px;
 }
 .between:first-child {
   display: flex;
@@ -78,6 +77,10 @@ span {
   height: 30px;
   border-radius: 25%;
 }
+.icon-small {
+  width: 15px;
+  height: 15px;
+}
 /* 按钮 */
 .btn {
   background-color: #3ABCFB;
@@ -85,7 +88,7 @@ span {
   font-size: 13px;
   font-size: 13px;
   text-align: center;
-  width: 70px;
+  width: 50px;
 }
 .btn-blank {
   border: #3ABCFB 1px solid;
@@ -97,8 +100,10 @@ span {
 }
 /* 覆写样式 */
 .input {
-  border-color: #E8E8ED;
   background-color: #F5F6F7;
+  border: #E7E7EC 1px solid;
+  border-radius: 25px;
+  padding: 5px 0px 5px 0px;
   color: #555B6F;
 }
 .input:focus {
@@ -110,7 +115,30 @@ span {
   padding: 5px 10px 5px 10px;
   font-size: 16px;
 }
-/* 样式 */
+.blank {
+  padding: 0px;
+}
+/* 通用样式 */
+.underline {
+  height: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-bottom: solid #D0D7DE 1px;
+  overflow: hidden;
+}
+.tip {
+  color: #9C9C9C;
+  padding: 5px 5px 5px 5px;
+  font-size: 13px;
+}
+.title {
+  font-size: 15px;
+  font-weight: bold;
+}
+.arc {
+  border-radius: 10px;
+}
+/* 样式元素 */
 .blankrect-row {
   height: 50px;
   width: 100%;
@@ -118,11 +146,6 @@ span {
 }
 .ads-color {
  background-color: teal;
-}
-.tip {
-  color: #9C9C9C;
-  padding: 5px 5px 5px 5px;
-  font-size: 13px;
 }
 .title-line {
   border-bottom: #F0F0F2 1px solid;
