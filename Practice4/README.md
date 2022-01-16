@@ -3,3 +3,4 @@
 - [仿写知乎回答， 有大概的布局和样式](./index2.html)
 - [仿照CSDN，编写出初步的样式和布局](./index3.html)
 - [仿照github，编写出初步的样式和布局](./index4.html)
+- [仿照rubyapi，编写出初步的样式和布局](./index5.html)

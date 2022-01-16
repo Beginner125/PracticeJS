@@ -1,0 +1,25 @@
+.top {
+  padding: 15px 50px 15px 50px;;
+  background-color: #E1175A;
+  color: white;
+  align-items: center;
+}
+.search {
+  height: 45px;
+  width: 600px;
+  font-size: 18px;
+  padding: 0px 10px 0px 10px;
+  background-color: white;
+}
+.container {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+.container .card {
+  flex-wrap: wrap;
+  width: 520px;
+  margin: 10px;
+}

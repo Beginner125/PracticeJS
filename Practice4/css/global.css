@@ -86,7 +86,6 @@ span {
   background-color: #3ABCFB;
   color: white;
   font-size: 13px;
-  font-size: 13px;
   text-align: center;
   width: 50px;
 }
@@ -102,7 +101,7 @@ span {
 .input {
   background-color: #F5F6F7;
   border: #E7E7EC 1px solid;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 5px 0px 5px 0px;
   color: #555B6F;
 }
@@ -123,7 +122,7 @@ span {
   height: 10px;
   margin-bottom: 10px;
   width: 100%;
-  border-bottom: solid #D0D7DE 1px;
+  border-bottom: solid #F0F0F2 1px;
   overflow: hidden;
 }
 .tip {
