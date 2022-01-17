@@ -1,0 +1,59 @@
+<!-- 仿照有道翻译页面，仿写出初步的样式和布局-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/common6.css">
+  <title>有道翻译</title>
+</head>
+<body>
+  <div class="header row between" style="position: relative;" id="header">
+    <img src="./assets/icon.png" alt="logo" class="icon">
+    <ul class="items row">
+      <li class="span">有道写作</li>
+      <li class="span">同传</li>
+      <li class="span">翻译机</li>
+      <li class="span">人工翻译</li>
+      <li class="span">翻译API</li>
+      <li class="span">翻译APP</li>
+      <li class="span">登录</li>
+    </ul>
+  </div>
+
+  <div class="container col">
+    <div class="first content between blankrect-row" style="width: 1000px;margin-top: 20px;">
+      <div class="left row">
+        <select name="lang" id="lang" class="input select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <div class="btn">翻译</div>
+        <div class="btn-blank">人工翻译</div>
+      </div>
+      <div class="right">
+        <input type="radio" name="num" id="word" class="input">
+        <span>划詞</span>
+      </div>
+    </div>
+    <div class="second row" style="width: 100%;justify-content: center;">
+      <textarea name="text" id="text" cols="30" rows="10" class="input card text-area"></textarea>
+      <textarea name="text" id="display" cols="30" rows="10" class="card text-area" disabled></textarea>
+    </div>
+  </div> 
+  <div class="underline content"></div>
+  <div class="footer col">
+    <ul class="items row">
+      <li class="span tip">有道首页|</li>
+      <li class="span tip">有道智选|</li>
+      <li class="span tip" style="white-space: nowrap;">有道精品课|</li>
+      <li class="span tip">关于有道|</li>
+      <li class="span tip">官方博客|</li>
+    </ul>
+    <span class="tip">© 2022 网易公司 网易公司 隐私政策 京ICP证080268号 京ICP备10005211号</span>
+  </div>
+</body>
+</html>

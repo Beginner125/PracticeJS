@@ -1,0 +1,36 @@
+.text-area {
+  width: 500px;
+  height: 200px;
+  padding: 15px;
+  background-color: #F2F2F2;
+  margin: 5px;
+}
+#header * {
+  font-size: 14px;
+}
+.container {
+  width: 100vw;
+  align-items: center;
+}
+.footer {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.select {
+  min-width: 200px;
+  height: 30px;
+}
+.items * {
+  white-space: nowrap;
+}
+.btn {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+}
+.btn-blank {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+}

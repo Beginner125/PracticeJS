@@ -84,7 +84,9 @@ span {
 /* 按钮 */
 .btn {
   background-color: #3ABCFB;
+  border: #3ABCFB 1px solid;
   color: white;
+  border-radius: 5px;
   font-size: 13px;
   text-align: center;
   width: 50px;
