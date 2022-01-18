@@ -1,0 +1,49 @@
+!!!
+/ 仿照RUBYAPI.org，仿写出初步的布局和样式
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "./css/global.css", :rel => "stylesheet"}/
+    %link{:href => "./css/common5.css", :rel => "stylesheet"}/
+    %title RUBYAPI
+  %body
+    .col.top
+      .row.between{:style => "width: 100%;"}
+        %img.icon{:alt => "logo", :src => "./assets/icon.png"}/
+        .right
+          %img.icon{:alt => "version", :src => "./assets/icon.png"}/
+          %img.icon{:alt => "skin", :src => "./assets/icon.png"}/
+      %h2{:style => "margin-bottom: 15px;"} Search and Explore Ruby Documentation
+      %input#search.input.search{:name => "search", :style => "margin-bottom: 20px;", :type => "search"}/
+    .row.content.container
+      .card
+        %h3 String
+        .span A String object holds and manipulates an arbitrary sequence of bytes, typically representing characters.
+        %a{:href => "#"} Read more
+      .card
+        %h3 String
+        .span A String object holds and manipulates an arbitrary sequence of bytes, typically representing characters.
+        %a{:href => "#"} Read more
+      .card
+        %h3 String
+        .span A String object holds and manipulates an arbitrary sequence of bytes, typically representing characters.
+        %a{:href => "#"} Read more
+      .card
+        %h3 String
+        .span A String object holds and manipulates an arbitrary sequence of bytes, typically representing characters.
+        %a{:href => "#"} Read more
+      .card
+        %h3 String
+        .span A String object holds and manipulates an arbitrary sequence of bytes, typically representing characters.
+        %a{:href => "#"} Read more
+      .card
+        %h3 String
+        .span A String object holds and manipulates an arbitrary sequence of bytes, typically representing characters.
+        %a{:href => "#"} Read more
+      .underline
+    .content.between
+      %span Ruby API ⋅ Documentation from the Ruby Project
+      %img{:alt => "logo", :src => "./assets/icon.png"}/
+      %img{}

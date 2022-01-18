@@ -1,0 +1,45 @@
+!!!
+/ 仿照有道翻译页面，仿写出初步的样式和布局
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %link{:href => "./css/global.css", :rel => "stylesheet"}/
+    %link{:href => "./css/common6.css", :rel => "stylesheet"}/
+    %title 有道翻译
+  %body
+    #header.header.row.between{:style => "position: relative;"}
+      %img.icon{:alt => "logo", :src => "./assets/icon.png"}/
+      %ul.items.row
+        %li.span 有道写作
+        %li.span 同传
+        %li.span 翻译机
+        %li.span 人工翻译
+        %li.span 翻译API
+        %li.span 翻译APP
+        %li.span 登录
+    .container.col
+      .first.content.between.blankrect-row{:style => "width: 1000px;margin-top: 20px;"}
+        .left.row
+          %select#lang.input.select{:name => "lang"}
+            %option{:value => "1"} 1
+            %option{:value => "2"} 2
+            %option{:value => "3"} 3
+          .btn 翻译
+          .btn-blank 人工翻译
+        .right
+          %input#word.input{:name => "num", :type => "radio"}/
+          %span 划詞
+      .second.row{:style => "width: 100%;justify-content: center;"}
+        %textarea#text.input.card.text-area{:cols => "30", :name => "text", :rows => "10"}
+        %textarea#display.card.text-area{:cols => "30", :disabled => "disabled", :name => "text", :rows => "10"}
+    .underline.content
+    .footer.col
+      %ul.items.row
+        %li.span.tip 有道首页|
+        %li.span.tip 有道智选|
+        %li.span.tip{:style => "white-space: nowrap;"} 有道精品课|
+        %li.span.tip 关于有道|
+        %li.span.tip 官方博客|
+      %span.tip © 2022 网易公司 网易公司 隐私政策 京ICP证080268号 京ICP备10005211号
