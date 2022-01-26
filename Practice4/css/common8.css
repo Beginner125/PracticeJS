@@ -1,0 +1,26 @@
+.container {
+  background-color: #F6F6F6;
+}
+
+.banner {
+  height: 90px;
+}
+
+.nav-head {
+  background-color: #96B97D;
+  color: #FFFFFF;
+  height: 40px;
+  justify-content: space-around;
+}
+
+.main-content {
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.main-content>.left {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0x
+}
