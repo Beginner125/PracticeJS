@@ -1,4 +1,4 @@
-# 做练习的js代码
+# 一些js练习代码
 
 # 介绍
 - [pratice1: 使用canvas仿照chrome写的离线小恐龙游戏](./Practice1/)
