@@ -1,0 +1,204 @@
+/* 该文件为通用文件 */
+
+
+/* 通用 */
+
+* {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    text-decoration: none;
+}
+
+span {
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+}
+
+
+/* 布局 */
+
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.between:first-child {
+    display: flex;
+}
+
+.between:last-child {
+    display: flex;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 5px 5px #F7F7F7;
+    width: 99vw;
+    height: 50px;
+    background-color: white;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+
+.header img:first-child {
+    margin-left: 4vw;
+}
+
+.header div:last-child {
+    margin-right: 4vw;
+}
+
+.content {
+    margin: 0px 80px 0px 80px;
+}
+
+.card {
+    border: #F0F0F2 1px solid;
+    border-radius: 3px;
+    padding: 15px 20px 15px 20px;
+    width: 100%;
+}
+
+.card .title {
+    color: #767676;
+    background-color: #F6F6F6;
+    padding: 10px 0px 10px 10px;
+    width: 100%;
+}
+
+
+/* 图标 */
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.icon-head {
+    width: 30px;
+    height: 30px;
+    border-radius: 25%;
+}
+
+.icon-small {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* 按钮 */
+
+.btn {
+    background-color: #3ABCFB;
+    border: #3ABCFB 1px solid;
+    color: white;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    width: 50px;
+}
+
+.btn-blank {
+    border: #3ABCFB 1px solid;
+    border-radius: 5px;
+    color: #3ABCFB;
+    font-size: 13px;
+    text-align: center;
+    width: 70px;
+}
+
+
+/* 覆写样式 */
+
+.input {
+    background-color: #F5F6F7;
+    border: #E7E7EC 1px solid;
+    border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+    color: #555B6F;
+}
+
+.input:focus {
+    border-color: #3ABCFB;
+    outline: none;
+}
+
+.span {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+}
+
+.blank {
+    padding: 0px;
+}
+
+
+/* 通用样式 */
+
+.underline {
+    height: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: solid #F0F0F2 1px;
+    overflow: hidden;
+}
+
+.tip {
+    color: #9C9C9C;
+    padding: 5px 5px 5px 5px;
+    font-size: 13px;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.arc {
+    border-radius: 10px;
+}
+
+
+/* 样式元素 */
+
+.blankrect-row {
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.ads-color {
+    background-color: teal;
+}
+
+.title-line {
+    border-bottom: #F0F0F2 1px solid;
+    padding: 5px 0px 0px 0px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.title-line .checked {
+    border-bottom: #222226 1px solid;
+}
